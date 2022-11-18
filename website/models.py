@@ -16,11 +16,25 @@ numit Person, ce are urmatoarele coloane: id, name, department.
 
 from . import db 
 
+
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key = True) #toate clasele pe care le cream aici incep cu id
     name = db.Column(db.String(150))
     department = db.Column(db.String(150))
 
-    def __init__(self, name= 'Nume', departament= 'niciunul'): # metoda __init__ da niste valori standard
-        self.name = name                                       #  obiectelor pe care le cream in cazul 
-        self.departament = departament                         # in care acestea nu sunt pasate de catre noi
+    """
+    metoda __init__ da niste valori standard obiectelor pe care le cream in cazul in care acestea nu sunt pasate de catre noi
+
+    """
+
+    def __init__(self, name= 'Nume', departament= 'niciunul'): 
+        self.name = name                                      
+        self.departament = departament
+
+
+class Admin(db.Model):
+    id = db.Column(db.Integer, primary_key = True) #toate clasele pe care le cream aici incep cu id
+
+
+class Viewer(db.Model):
+    id = db.Column(db.Integer, primary_key = True) #toate clasele pe care le cream aici incep cu id

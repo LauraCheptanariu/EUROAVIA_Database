@@ -17,11 +17,32 @@ from flask import Blueprint, render_template
 views = Blueprint('views', __name__)
 
 
-@views.route('/login', methods = ['GET', 'POST'])
-def login():
+@views.route('/', methods = ['GET', 'POST'])
+def home():
+
+    # atentiune aici, cand logam un viewer si cand logam un admin
+
+    return render_template("home.html") # aici se face conexiunea cu front-end-ul
+
+@views.route('/single_view', methods = ['GET', 'POST'])
+def single_view():
 
     # aici for fi functionalitatile paginii
 
-    return render_template("login.html") # aici se face conexiunea cu front-end-ul
+    return render_template("single_view.html")
 
 
+@views.route('/multiple_view', methods = ['GET', 'POST'])
+def multiple_view():
+
+    # atentiune aici, cand cream un cont de viewer si cand cream un cont de admin
+
+    return render_template("multiple_view.html")
+
+
+@views.route('/admin', methods = ['GET', 'POST'])
+def admin():
+
+    # paginile de admin pot fi multiple (pe modelul aplicatiei de votare facute de mine)
+
+    return render_template("admin.html")

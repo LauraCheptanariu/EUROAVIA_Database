@@ -14,9 +14,24 @@ from flask import Blueprint, render_template
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/home', methods = ['GET', 'POST'])
-def home():
+@auth.route('/login', methods = ['GET', 'POST'])
+def login():
 
     # aici for fi functionalitatile paginii
 
-    return render_template("home.html") # aici se face conexiunea cu front-end-ul
+    return render_template("login.html") # aici se face conexiunea cu front-end-ul
+
+@auth.route('/log_out', methods = ['GET', 'POST'])
+def log_out():
+
+    # aici for fi functionalitatile paginii
+
+    return render_template("log_out.html")
+
+
+@auth.route('/sign_up', methods = ['GET', 'POST'])
+def sign_up():
+
+    # aici for fi functionalitatile paginii
+
+    return render_template("sign_up.html")
