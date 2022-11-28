@@ -10,10 +10,10 @@
 """
 
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import Person
+from .models import Person, Admin
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_user, login_required, logout_user , current_user
 
 
 auth = Blueprint('auth', __name__)
@@ -40,9 +40,10 @@ def login():
 
 @auth.route('/log_out', methods = ['GET', 'POST'])
 @login_required
+
 def log_out():
 
-    logout_person()
+    logout_user()
 
     return render_template("log_out.html")
 
@@ -55,9 +56,10 @@ def sign_up():
         first_name= request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+        type = request.form.get('type')
 
-        person= Person.query.filter_by(email=email).first()
-        if person:
+        admin= Admin.query.filter_by(email=email).first()
+        if admin:
             flash('Email already exists', category='error')
         elif email[-22] == '@euroavia-bucuresti.ro':
             flash('You need an Euroavia Bucuresti email.', category='error')
@@ -67,8 +69,9 @@ def sign_up():
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
-        else:
-
-            new_person = Person( email=email, first_name=first_name, password=generate_password_hash(password1 , method='sha256'))
-
+        else:   
+            new_admin = Admin( email=email, first_name=first_name, password=generate_password_hash(password1 , method='sha256'), type=type)
+            db.session.add(new_admin)
+            db.session.comit
+            
     return render_template("sign_up.html")
